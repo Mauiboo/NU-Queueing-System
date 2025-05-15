@@ -13,9 +13,11 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(
   cors({
-    origin: "https://frontend-zr2n.onrender.com", // ← important!
+    origin: "https://frontend-zr2n.onrender.com",
+    credentials: true, // ← required for cookies/session-based auth
   })
 );
+
 
 
 app.use(express.json({ limit: "4mb" }));
