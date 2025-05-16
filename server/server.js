@@ -10,30 +10,20 @@ dotenv.config({ path: "./config.env" });
 const app = express();
 const PORT = process.env.PORT || 5000;
 
- HEAD
-// Middleware
+// Correct CORS middleware
 app.use(
   cors({
-    origin: "https://frontend-zr2n.onrender.com",
-    credentials: true, // ← required for cookies/session-based auth
-  })
-);
-
-
-
-// Updated CORS Middleware
-app.use(
-  cors({
-    origin: "https://frontend-zr2n.onrender.com",
+    origin: "https://frontend-zr2n.onrender.com/",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// Handle preflight OPTIONS requests
+// Preflight support
 app.options("*", cors());
 
+// Middleware
 app.use(express.json({ limit: "4mb" }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -44,5 +34,5 @@ connectToMongo();
 app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(Server running on port ${PORT});
 });
