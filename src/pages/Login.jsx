@@ -13,12 +13,13 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://backend-ryp4.onrender.com", {
+      const response = await fetch("https://backend-ryp4.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include", // Allow cookies/session
       });
 
       const data = await response.json();
@@ -100,12 +101,6 @@ const Login = () => {
       padding: "20px 0",
       position: "relative",
     },
-    logoContainer: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      lineHeight: 1,
-    },
     loginContainer: {
       padding: "30px 20px",
       backgroundColor: "white",
@@ -115,7 +110,6 @@ const Login = () => {
       width: "90%",
       maxWidth: "480px",
     },
-
     passwordToggleStyle: {
       position: "absolute",
       right: "15px",
