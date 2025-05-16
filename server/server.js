@@ -10,6 +10,7 @@ dotenv.config({ path: "./config.env" });
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+ HEAD
 // Middleware
 app.use(
   cors({
@@ -19,6 +20,19 @@ app.use(
 );
 
 
+
+// Updated CORS Middleware
+app.use(
+  cors({
+    origin: "https://frontend-zr2n.onrender.com",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Handle preflight OPTIONS requests
+app.options("*", cors());
 
 app.use(express.json({ limit: "4mb" }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
